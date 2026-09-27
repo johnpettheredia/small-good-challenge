@@ -1195,20 +1195,29 @@
         });
         const file = new File([blob], `small-good-day-${String(number).padStart(2, "0")}.png`, { type: "image/png" });
         const shareText = `Day ${number} of Small Good: ${day.act} ${INSTAGRAM_HANDLE}`;
+        let shareFailed = false;
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ title: `Small Good · Day ${number}`, text: shareText, files: [file] });
-          elements.actionStatus.textContent = "Your story card is ready to share.";
-        } else {
-          const imageUrl = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = imageUrl;
-          link.download = file.name;
-          document.body.append(link);
-          link.click();
-          link.remove();
-          window.setTimeout(() => URL.revokeObjectURL(imageUrl), 1500);
-          elements.actionStatus.textContent = "Story image saved. Add it to your story when you're ready.";
+          try {
+            await navigator.share({ title: `Small Good · Day ${number}`, text: shareText, files: [file] });
+            elements.actionStatus.textContent = "Your story card is ready to share.";
+            return;
+          } catch (shareError) {
+            if (shareError && shareError.name === "AbortError") {
+              elements.actionStatus.textContent = "No worries—your story card is still here.";
+              return;
+            }
+            shareFailed = true;
+          }
         }
+        const imageUrl = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = imageUrl;
+        link.download = file.name;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        window.setTimeout(() => URL.revokeObjectURL(imageUrl), 1500);
+        elements.actionStatus.textContent = shareFailed ? "Native sharing isn't available here; your story image was saved." : "Story image saved. Add it to your story when you're ready.";
       } catch (error) {
         elements.actionStatus.textContent = error && error.name === "AbortError" ? "No worries—your story card is still here." : "Couldn't make the story card in this browser. Try again or take a screenshot.";
       }
