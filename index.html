@@ -1,0 +1,1240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f1e8">
+  <meta name="description" content="Small Good is a gentle, free 30-day kindness challenge: one small act, one day at a time.">
+  <title>Small Good — a 30-day kindness challenge</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f1e8;
+      --surface: #fffdf8;
+      --ink: #27372e;
+      --muted: #69756a;
+      --soft: #e8e2d5;
+      --line: #ded8ca;
+      --green: #557258;
+      --green-dark: #3c5a43;
+      --green-wash: #e4ebdc;
+      --coral: #ba664b;
+      --coral-wash: #f3e2d8;
+      --gold: #d2aa59;
+      --shadow: 0 16px 48px rgba(55, 63, 47, .07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        radial-gradient(circle at 94% 3%, rgba(210, 170, 89, .14), transparent 19rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid rgba(85, 114, 88, .48);
+      outline-offset: 3px;
+    }
+
+    a {
+      color: var(--green-dark);
+    }
+
+    .page-shell {
+      width: min(calc(100% - 28px), 600px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(77, 89, 70, .14);
+    }
+
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -.04em;
+      text-decoration: none;
+    }
+
+    .wordmark-mark {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      border: 1px solid rgba(60, 90, 67, .28);
+      border-radius: 50%;
+      color: var(--green-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13px;
+      letter-spacing: -.08em;
+    }
+
+    .header-note {
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .02em;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: end;
+      gap: 18px;
+      padding: 35px 0 22px;
+    }
+
+    .eyebrow {
+      margin: 0 0 11px;
+      color: var(--coral);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(54px, 8vw, 86px);
+      font-weight: 500;
+      letter-spacing: -.075em;
+      line-height: .95;
+    }
+
+    .intro-copy {
+      max-width: 510px;
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    .tagalog-welcome {
+      margin: 12px 0 0;
+      color: var(--green-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      font-style: italic;
+    }
+
+    .intro-aside {
+      display: grid;
+      gap: 12px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 253, 248, .72);
+    }
+
+    .aside-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    .path-line {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 19px;
+      line-height: 1.4;
+    }
+
+    .path-line span {
+      color: var(--coral);
+    }
+
+    .challenge-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      align-items: start;
+      gap: 14px;
+      padding-bottom: 26px;
+    }
+
+    .day-card,
+    .journey-card,
+    .about-card {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .day-card {
+      padding: 22px 19px;
+    }
+
+    .day-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 21px;
+    }
+
+    .day-count,
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .day-count {
+      background: var(--green-wash);
+      color: var(--green-dark);
+    }
+
+    .category-pill {
+      max-width: 65%;
+      background: var(--coral-wash);
+      color: #8f4f3c;
+      text-align: right;
+    }
+
+    .act-label {
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .act-text {
+      max-width: 650px;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.2;
+    }
+
+    .why-block {
+      margin: 19px 0 0;
+      padding: 15px 17px;
+      border-left: 3px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      background: #f8f4e9;
+    }
+
+    .why-label,
+    .reflection-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .why-text {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .tagalog-line {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 4px 9px;
+      margin: 15px 0 0;
+    }
+
+    .tagalog-line strong {
+      color: var(--green-dark);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .tagalog-line span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .reflection-block {
+      margin-top: 24px;
+    }
+
+    .reflection-prompt {
+      margin: 0 0 9px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .reflection-input {
+      display: block;
+      width: 100%;
+      min-height: 78px;
+      resize: vertical;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffefa;
+      color: var(--ink);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .reflection-input::placeholder {
+      color: #879084;
+    }
+
+    .privacy-note {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .day-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 19px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 45px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+      transition: background-color .16s ease, transform .16s ease, border-color .16s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .button-primary:hover {
+      background: #2e4a35;
+    }
+
+    .button-primary.is-complete {
+      background: var(--coral);
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .button-secondary:hover {
+      border-color: #aeb8a8;
+      background: #f7f5ee;
+    }
+
+    .button-status {
+      min-height: 20px;
+      margin: 9px 0 0;
+      color: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .journey-card {
+      padding: 20px;
+    }
+
+    .journey-heading {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .journey-heading h2,
+    .about-card h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+      font-weight: 500;
+      letter-spacing: -.045em;
+    }
+
+    .progress-count {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .progress-track {
+      height: 8px;
+      margin-top: 15px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #ece8de;
+    }
+
+    .progress-fill {
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #7a936c, #bdc987);
+      transition: width .25s ease;
+    }
+
+    .streak-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 14px 0 19px;
+      padding: 12px 13px;
+      border: 1px solid #e4dfd3;
+      border-radius: 13px;
+      background: #faf7ef;
+    }
+
+    .streak-label {
+      margin: 0;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .streak-value {
+      margin: 0;
+      color: var(--coral);
+      font-size: 14px;
+      font-weight: 800;
+      text-align: right;
+    }
+
+    .day-grid-label {
+      margin: 0 0 9px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .day-dot {
+      display: grid;
+      min-width: 0;
+      aspect-ratio: 1;
+      place-items: center;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fffefa;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 750;
+      transition: color .14s ease, background-color .14s ease, border-color .14s ease, transform .14s ease;
+    }
+
+    .day-dot:hover {
+      transform: translateY(-1px);
+      border-color: #9cab91;
+    }
+
+    .day-dot[aria-current="step"] {
+      border-color: var(--green-dark);
+      background: var(--green-wash);
+      color: var(--green-dark);
+      box-shadow: inset 0 0 0 1px var(--green-dark);
+    }
+
+    .day-dot.is-done {
+      border-color: #ccd8c8;
+      background: #e8eee4;
+      color: var(--green-dark);
+    }
+
+    .day-dot.is-done::after {
+      content: "✓";
+      font-size: 14px;
+    }
+
+    .day-dot.is-done span {
+      display: none;
+    }
+
+    .reassurance {
+      margin: 16px 0 0;
+      padding-top: 13px;
+      border-top: 1px solid #eee9df;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .about-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+      padding-bottom: 36px;
+    }
+
+    .about-card {
+      padding: 22px 24px;
+      box-shadow: none;
+    }
+
+    .about-card p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .maker-line {
+      color: var(--ink) !important;
+      font-weight: 700;
+    }
+
+    .handle-placeholder {
+      display: inline-block;
+      padding: 2px 7px;
+      border: 1px dashed #b8a98b;
+      border-radius: 6px;
+      background: #fbf6e8;
+      color: #765d36;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+
+    .handle-help {
+      font-size: 11px !important;
+    }
+
+    .research-details {
+      margin-top: 11px;
+      border-top: 1px solid #eee9df;
+      padding-top: 10px;
+    }
+
+    .research-details summary {
+      color: var(--green-dark);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .research-details p,
+    .research-details ul {
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .research-details ul {
+      display: grid;
+      gap: 6px;
+      margin: 8px 0 0;
+      padding-left: 17px;
+      color: var(--muted);
+    }
+
+    .site-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 16px;
+      padding: 0 0 28px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+    }
+
+    @media (min-width: 761px) {
+      .page-shell {
+        width: min(1100px, calc(100% - 36px));
+      }
+
+      .site-header {
+        min-height: 76px;
+      }
+
+      .intro {
+        grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr);
+        gap: 32px;
+        padding: 44px 0 28px;
+      }
+
+      .intro-aside {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .aside-label {
+        grid-column: auto;
+      }
+
+      .challenge-layout {
+        grid-template-columns: minmax(0, 1.45fr) minmax(290px, .8fr);
+        gap: 18px;
+      }
+
+      .day-card {
+        padding: clamp(22px, 3.3vw, 36px);
+      }
+
+      .journey-card {
+        padding: 22px;
+      }
+
+      .day-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .about-section {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 28px, 600px);
+      }
+
+      .site-header {
+        min-height: 64px;
+      }
+
+      .intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 18px;
+        padding: 35px 0 22px;
+      }
+
+      .intro-aside {
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 8px 14px;
+      }
+
+      .aside-label {
+        grid-column: 1 / -1;
+      }
+
+      .path-line {
+        font-size: 16px;
+      }
+
+      .challenge-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+
+      .day-card {
+        padding: 22px 19px;
+      }
+
+      .journey-card {
+        padding: 20px;
+      }
+
+      .day-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .about-section {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .page-shell {
+        width: calc(100% - 24px);
+      }
+
+      .header-note {
+        font-size: 10px;
+        text-align: right;
+      }
+
+      .wordmark {
+        gap: 7px;
+        font-size: 18px;
+      }
+
+      h1 {
+        font-size: 58px;
+      }
+
+      .day-card-top {
+        align-items: flex-start;
+      }
+
+      .category-pill {
+        max-width: 58%;
+        font-size: 9px;
+      }
+
+      .act-text {
+        font-size: 30px;
+      }
+
+      .day-actions .button {
+        flex: 1 1 100%;
+      }
+
+      .day-grid {
+        gap: 6px;
+      }
+
+      .day-dot {
+        border-radius: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header page-shell">
+    <a class="wordmark" href="#top" aria-label="Small Good home">
+      <span class="wordmark-mark" aria-hidden="true">sg</span>
+      <span>Small Good</span>
+    </a>
+    <span class="header-note">A gentle 30-day kindness challenge</span>
+  </header>
+
+  <main id="top" class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">One small act, one day at a time</p>
+        <h1 id="page-title">Small Good</h1>
+        <p class="intro-copy">Begin with a little kindness for yourself. Let it move outward, one ordinary moment at a time.</p>
+        <p class="tagalog-welcome" lang="tl">Munting kabutihan, araw-araw.</p>
+      </div>
+      <aside class="intro-aside" aria-label="The challenge path">
+        <p class="aside-label">The gentle path</p>
+        <p class="path-line">Start with <span>you</span> → care for others → let it travel</p>
+      </aside>
+    </section>
+
+    <section class="challenge-layout" aria-label="Your kindness challenge">
+      <article class="day-card" aria-labelledby="act-title">
+        <div class="day-card-top">
+          <span class="day-count" id="day-count">Day 01 of 30</span>
+          <span class="category-pill" id="category-pill">Kindness to yourself</span>
+        </div>
+        <p class="act-label">Today's small good</p>
+        <h2 class="act-text" id="act-title">Take three slow breaths and let your shoulders drop.</h2>
+        <div class="why-block">
+          <span class="why-label">A little why</span>
+          <p class="why-text" id="why-text">A small pause is a gentle way to arrive in the moment you're already in.</p>
+        </div>
+        <p class="tagalog-line"><strong lang="tl" id="tagalog-text">Dahan-dahan lang.</strong><span id="translation-text">Take it gently.</span></p>
+        <div class="reflection-block">
+          <label class="reflection-label" for="reflection-input">A moment to notice</label>
+          <p class="reflection-prompt" id="reflection-prompt">What did you notice after pausing?</p>
+          <textarea class="reflection-input" id="reflection-input" maxlength="600" placeholder="A few words, or leave this blank…"></textarea>
+          <p class="privacy-note">Your note and progress stay in this browser on this device.</p>
+        </div>
+        <div class="day-actions">
+          <button class="button button-primary" id="complete-button" type="button" aria-pressed="false">Mark this act done</button>
+          <button class="button button-secondary" id="share-button" type="button">Share today's act</button>
+        </div>
+        <p class="button-status" id="action-status" role="status" aria-live="polite"></p>
+      </article>
+
+      <aside class="journey-card" aria-labelledby="journey-title">
+        <div class="journey-heading">
+          <h2 id="journey-title">Your little trail</h2>
+          <span class="progress-count" id="progress-count">0 / 30</span>
+        </div>
+        <div class="progress-track" id="progress-track" role="progressbar" aria-label="Challenge progress" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <div class="streak-row">
+          <p class="streak-label">Your current streak</p>
+          <p class="streak-value" id="streak-value">Start whenever you're ready</p>
+        </div>
+        <p class="day-grid-label">Pick any day</p>
+        <div class="day-grid" id="day-grid" aria-label="Choose a challenge day"></div>
+        <p class="reassurance">Miss a day? Your checked acts stay saved. Pick up again whenever life makes room.</p>
+      </aside>
+    </section>
+
+    <section class="about-section" aria-label="About Small Good">
+      <article class="about-card">
+        <h2>A note from Peds</h2>
+        <p>I believe small acts can change the world. I made Small Good to help us practice that belief in everyday life—starting with ourselves, then carrying a little more care into the spaces we share.</p>
+        <p class="maker-line">Made with care by Peds · Instagram <span class="handle-placeholder">@yourhandle</span></p>
+        <p class="handle-help">Handle placeholder: replace @yourhandle with Peds's profile before sharing widely.</p>
+      </article>
+      <article class="about-card">
+        <h2>Small, not perfect</h2>
+        <p>Every act is free and easy to adapt. Ask first, respect a no, and choose what feels safe. The streak is a gentle nudge—not a score. This is a practice, not a promise about mental health or a 30-day habit guarantee.</p>
+        <details class="research-details">
+          <summary>Curious about the research?</summary>
+          <p>Studies of kindness and prosocial actions are promising, but the effects vary. A 2023 review found a growing evidence base and called for more research. Thirty days is a friendly container, not a scientific finish line; habit timing varies, and one missed opportunity did not materially affect habit formation in a real-world study.</p>
+          <ul>
+            <li><a href="https://greatergood.berkeley.edu/article/item/happiness_for_a_lifetime" target="_blank" rel="noreferrer">Sonja Lyubomirsky on weekly acts of kindness</a></li>
+            <li><a href="https://pubmed.ncbi.nlm.nih.gov/17356687/" target="_blank" rel="noreferrer">Otake et al., a one-week kindness-counting study</a></li>
+            <li><a href="https://pubmed.ncbi.nlm.nih.gov/18356530/" target="_blank" rel="noreferrer">Dunn, Aknin & Norton on prosocial spending</a></li>
+            <li><a href="https://pubmed.ncbi.nlm.nih.gov/32250135/" target="_blank" rel="noreferrer">Registered replication: prosocial-spending effects vary</a></li>
+            <li><a href="https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2812720" target="_blank" rel="noreferrer">2023 systematic review of prosocial interventions</a></li>
+            <li><a href="https://doi.org/10.1002/ejsp.674" target="_blank" rel="noreferrer">Lally et al. on real-world habit formation</a></li>
+            <li><a href="https://www.randomactsofkindness.org/printables" target="_blank" rel="noreferrer">Random Acts of Kindness Foundation printables</a></li>
+            <li><a href="https://thegreatkindnesschallenge.com/" target="_blank" rel="noreferrer">The Great Kindness Challenge</a></li>
+            <li><a href="https://www.kind30.org/" target="_blank" rel="noreferrer">KIND30 free challenge resources</a></li>
+          </ul>
+        </details>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer page-shell">
+    <p>Small Good · 30 days of small, voluntary acts</p>
+    <p>No account. No backend. Progress is saved in this browser.</p>
+    <button class="button button-secondary" id="reset-button" type="button">Clear my progress</button>
+  </footer>
+  <div class="sr-only" id="screen-reader-status" aria-live="polite"></div>
+
+  <script>
+    const DAYS = [
+      { group: "Kindness to yourself", act: "Take three slow breaths and let your shoulders drop.", why: "A small pause is a gentle way to arrive in the moment you're already in.", reflect: "What did you notice after pausing?", tl: "Dahan-dahan lang.", translation: "Take it gently." },
+      { group: "Kindness to yourself", act: "Swap one harsh thought about yourself for a fairer sentence.", why: "You can be honest with yourself without being unkind.", reflect: "What is a kinder, still-honest way to say it?", tl: "Maging mabait ka rin sa sarili mo.", translation: "Be kind to yourself, too." },
+      { group: "Kindness to yourself", act: "Take a five-minute screen-free break for something restful.", why: "Rest does not have to be earned first.", reflect: "What kind of rest helped, even a little?", tl: "Pahinga rin ang progreso.", translation: "Rest is progress, too." },
+      { group: "Kindness to yourself", act: "Name one thing you handled well, even imperfectly.", why: "Noticing your effort makes small progress visible.", reflect: "What did you do that deserves some credit?", tl: "Sapat na ang maliliit na hakbang.", translation: "Small steps are enough." },
+      { group: "Kindness to yourself", act: "If you can, postpone one non-urgent task and protect a little breathing room.", why: "A gentle boundary can protect the energy you need.", reflect: "What could wait without causing harm?", tl: "Karapatan mong magpahinga.", translation: "You have the right to rest." },
+      { group: "Kindness to yourself", act: "Make one small corner of your space feel calmer.", why: "One cared-for corner can feel like a fresh start.", reflect: "What did you choose to change?", tl: "Ayusin ang isang sulok.", translation: "Tidy one corner." },
+      { group: "Kindness to yourself", act: "Ask yourself what you need, then meet one small part of it.", why: "Self-kindness can start with listening instead of fixing everything.", reflect: "What did you hear yourself asking for?", tl: "Pakinggan ang kailangan mo.", translation: "Listen to what you need." },
+      { group: "People close to you", act: "Send someone a simple check-in, with no reply required.", why: "A low-pressure message lets someone know they are remembered.", reflect: "Who came to mind when you sent it?", tl: "Kumustahin ang isang kaibigan.", translation: "Check in on a friend." },
+      { group: "People close to you", act: "Thank someone for one specific thing they did.", why: "Specific appreciation helps people feel seen.", reflect: "What detail made your thanks genuine?", tl: "Magpasalamat nang taos-puso.", translation: "Give a heartfelt thanks." },
+      { group: "People close to you", act: "Give someone five minutes of your full attention.", why: "Listening without rushing to fix can be a gift.", reflect: "What did you notice when you slowed down?", tl: "Makinig nang buong puso.", translation: "Listen with your whole heart." },
+      { group: "People close to you", act: "Offer one small, specific help—and make it easy to say no.", why: "An offer feels kindest when it leaves room for choice.", reflect: "How did asking first shape the moment?", tl: "Mag-alok, huwag magpilit.", translation: "Offer; do not insist." },
+      { group: "People close to you", act: "Give a sincere compliment about someone's effort.", why: "Noticing effort can encourage someone without comparing them.", reflect: "What did you notice that was worth praising?", tl: "Magbigay ng tapat na papuri.", translation: "Give a sincere compliment." },
+      { group: "People close to you", act: "Send a voice note to someone you miss—or write instead.", why: "A familiar hello can make connection feel closer.", reflect: "How did it feel to reach out?", tl: "Ipaalam na naaalala mo sila.", translation: "Let them know you remember them." },
+      { group: "People close to you", act: "Ask someone how something important to them went.", why: "Following up shows you remembered what mattered to them.", reflect: "What detail did they share with you?", tl: "Itanong kung kumusta ang araw.", translation: "Ask how their day is going." },
+      { group: "Strangers & shared spaces", act: "Say a simple thank-you to someone helping you today.", why: "Respectful appreciation can brighten an ordinary exchange.", reflect: "What moment did you slow down to notice?", tl: "Magpasalamat sa naglilingkod.", translation: "Thank someone who is serving." },
+      { group: "Strangers & shared spaces", act: "Pick up one piece of litter only if it is safe to do so.", why: "Caring for a shared place can help people you may never meet.", reflect: "Where might this small care travel?", tl: "Alagaan ang pinagsasaluhang lugar.", translation: "Care for the place we share." },
+      { group: "Strangers & shared spaces", act: "Leave a thoughtful, kind comment on something you enjoyed.", why: "A sincere note can tell a creator their work reached someone.", reflect: "What exactly did you appreciate?", tl: "Mag-iwan ng mabuting komento.", translation: "Leave a kind comment." },
+      { group: "Strangers & shared spaces", act: "Let someone go ahead or hold a door, if it feels natural.", why: "A small courtesy can ease a moment without needing a big gesture.", reflect: "What did you notice about the timing?", tl: "Magbigay-daan kung kaya.", translation: "Make way, if you can." },
+      { group: "Strangers & shared spaces", act: "Make room for a quieter voice in a conversation, without putting them on the spot.", why: "Space to speak can help people feel included; follow their cues.", reflect: "How did you make space without demanding attention?", tl: "Bigyan ng puwang ang bawat boses.", translation: "Make room for every voice." },
+      { group: "Strangers & shared spaces", act: "Leave a shared space a little tidier than you found it.", why: "Shared care adds up, even when no one sees who did it.", reflect: "What changed for the next person?", tl: "Iwanang maayos ang pinagsasaluhang lugar.", translation: "Leave our shared place in good shape." },
+      { group: "Strangers & shared spaces", act: "Write an honest, helpful review for a small business you value.", why: "Specific feedback can help another person decide where to go.", reflect: "What detail would help the next person?", tl: "Suportahan ang maliit na negosyo.", translation: "Support a small business." },
+      { group: "Let kindness travel", act: "Share one useful tip or resource with someone who could use it.", why: "Useful help can be generous without taking over.", reflect: "Was it welcome and easy to use?", tl: "Ibahagi ang kapaki-pakinabang na alam mo.", translation: "Share something useful that you know." },
+      { group: "Let kindness travel", act: "Reach out to someone you have not checked on in a while.", why: "Connection can begin with one honest hello.", reflect: "How did you reach out without assuming what they need?", tl: "Magparamdam nang walang hinihingi.", translation: "Reach out without asking for anything." },
+      { group: "Let kindness travel", act: "Give credit to someone whose work often goes unnoticed.", why: "Recognition can make quiet effort visible.", reflect: "Who deserves to be named and thanked?", tl: "Ibigay ang papuring nararapat.", translation: "Give the praise that is due." },
+      { group: "Let kindness travel", act: "Invite someone to join a plan, leaving room for them to say no.", why: "An invitation can open a door while keeping choice with them.", reflect: "How did you make both answers feel okay?", tl: "Mag-anyaya nang may puwang tumanggi.", translation: "Invite, leaving room to say no." },
+      { group: "Let kindness travel", act: "Give fifteen minutes to a community task, if one is available to you.", why: "Shared projects turn care into something useful together.", reflect: "What would make you want to return?", tl: "Maglaan ng oras para tumulong.", translation: "Make a little time to help." },
+      { group: "Let kindness travel", act: "Pass along an opportunity that could help someone else.", why: "Sharing a lead can make a path easier to find.", reflect: "Did you share it without adding pressure?", tl: "Ibahagi ang mabuting pagkakataon.", translation: "Share a good opportunity." },
+      { group: "Let kindness travel", act: "Choose one act from this month and make it easier to repeat.", why: "A simple cue can help a valued action fit into real life.", reflect: "What reminder or moment could become your cue?", tl: "Gawing madali ang kabutihan.", translation: "Make kindness easier." },
+      { group: "Let kindness travel", act: "Thank someone doing quiet, often-unnoticed work.", why: "Noticing unseen effort can help someone feel valued.", reflect: "What work had gone unnoticed?", tl: "Pansinin ang tahimik na tumutulong.", translation: "Notice those who help quietly." },
+      { group: "Let kindness travel", act: "Choose one small act to carry forward—and invite someone to choose theirs.", why: "Kindness can keep moving when it stays personal and voluntary.", reflect: "Which small act do you want to keep?", tl: "Ipagpatuloy ang kabutihan.", translation: "Keep kindness going." }
+    ];
+
+    const STORAGE_KEY = "small-good-progress-v1";
+    const INSTAGRAM_HANDLE = "@yourhandle";
+    const freshProgress = () => ({ completedAt: {}, reflections: {}, selectedDay: 1, streak: 0 });
+    let progress = loadProgress();
+    let storageAvailable = true;
+    let actionMessage = "";
+
+    const elements = {
+      dayCount: document.getElementById("day-count"),
+      category: document.getElementById("category-pill"),
+      actTitle: document.getElementById("act-title"),
+      why: document.getElementById("why-text"),
+      tagalog: document.getElementById("tagalog-text"),
+      translation: document.getElementById("translation-text"),
+      reflectionPrompt: document.getElementById("reflection-prompt"),
+      reflectionInput: document.getElementById("reflection-input"),
+      completeButton: document.getElementById("complete-button"),
+      shareButton: document.getElementById("share-button"),
+      actionStatus: document.getElementById("action-status"),
+      progressCount: document.getElementById("progress-count"),
+      progressTrack: document.getElementById("progress-track"),
+      progressFill: document.getElementById("progress-fill"),
+      streakValue: document.getElementById("streak-value"),
+      dayGrid: document.getElementById("day-grid"),
+      resetButton: document.getElementById("reset-button"),
+      screenReaderStatus: document.getElementById("screen-reader-status")
+    };
+
+    function loadProgress() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!saved || typeof saved !== "object") return freshProgress();
+        return {
+          completedAt: saved.completedAt && typeof saved.completedAt === "object" ? saved.completedAt : {},
+          reflections: saved.reflections && typeof saved.reflections === "object" ? saved.reflections : {},
+          selectedDay: Number.isInteger(saved.selectedDay) && saved.selectedDay >= 1 && saved.selectedDay <= 30 ? saved.selectedDay : 1,
+          streak: Number.isInteger(saved.streak) && saved.streak >= 0 ? saved.streak : 0
+        };
+      } catch (error) {
+        return freshProgress();
+      }
+    }
+
+    function dateKey(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function offsetDateKey(daysBack) {
+      const date = new Date();
+      date.setHours(12, 0, 0, 0);
+      date.setDate(date.getDate() - daysBack);
+      return dateKey(date);
+    }
+
+    function getStreak() {
+      const completionDates = new Set(Object.values(progress.completedAt));
+      let cursor = offsetDateKey(0);
+      if (!completionDates.has(cursor)) {
+        cursor = offsetDateKey(1);
+        if (!completionDates.has(cursor)) return 0;
+      }
+      let count = 0;
+      while (completionDates.has(cursor)) {
+        count += 1;
+        const previous = new Date(`${cursor}T12:00:00`);
+        previous.setDate(previous.getDate() - 1);
+        cursor = dateKey(previous);
+      }
+      return count;
+    }
+
+    function saveProgress() {
+      progress.streak = getStreak();
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+        storageAvailable = true;
+      } catch (error) {
+        storageAvailable = false;
+      }
+    }
+
+    function completedCount() {
+      return DAYS.reduce((count, day, index) => count + (progress.completedAt[index + 1] ? 1 : 0), 0);
+    }
+
+    function currentDay() {
+      return progress.selectedDay;
+    }
+
+    function getNextIncomplete(afterDay) {
+      for (let index = afterDay; index < DAYS.length; index += 1) {
+        if (!progress.completedAt[index + 1]) return index + 1;
+      }
+      for (let index = 0; index < afterDay; index += 1) {
+        if (!progress.completedAt[index + 1]) return index + 1;
+      }
+      return DAYS.length;
+    }
+
+    function renderDayGrid() {
+      elements.dayGrid.replaceChildren();
+      DAYS.forEach((day, index) => {
+        const number = index + 1;
+        const done = Boolean(progress.completedAt[number]);
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `day-dot${done ? " is-done" : ""}`;
+        button.setAttribute("aria-label", `Day ${number}${done ? ", completed" : ""}: ${day.act}`);
+        button.setAttribute("aria-pressed", String(number === currentDay()));
+        if (number === currentDay()) button.setAttribute("aria-current", "step");
+        const text = document.createElement("span");
+        text.textContent = String(number).padStart(2, "0");
+        button.append(text);
+        button.addEventListener("click", () => {
+          progress.selectedDay = number;
+          saveProgress();
+          render();
+        });
+        elements.dayGrid.append(button);
+      });
+    }
+
+    function render() {
+      const number = currentDay();
+      const day = DAYS[number - 1];
+      const done = Boolean(progress.completedAt[number]);
+      const count = completedCount();
+      const streak = getStreak();
+
+      elements.dayCount.textContent = `Day ${String(number).padStart(2, "0")} of 30`;
+      elements.category.textContent = day.group;
+      elements.actTitle.textContent = day.act;
+      elements.why.textContent = day.why;
+      elements.tagalog.textContent = day.tl;
+      elements.translation.textContent = day.translation;
+      elements.reflectionPrompt.textContent = day.reflect;
+      elements.reflectionInput.value = progress.reflections[number] || "";
+      elements.completeButton.textContent = done ? "Undo this day's check-in" : "Mark this act done";
+      elements.completeButton.classList.toggle("is-complete", done);
+      elements.completeButton.setAttribute("aria-pressed", String(done));
+      elements.progressCount.textContent = `${count} / 30`;
+      elements.progressTrack.setAttribute("aria-valuenow", String(count));
+      elements.progressFill.style.width = `${(count / DAYS.length) * 100}%`;
+      elements.streakValue.textContent = streak > 0 ? `${streak} ${streak === 1 ? "day" : "days"}` : "Start whenever you're ready";
+      elements.actionStatus.textContent = storageAvailable ? (actionMessage || "Saved in this browser") : "Browser storage is unavailable; this progress may not be saved.";
+      renderDayGrid();
+    }
+
+    function markDay() {
+      const number = currentDay();
+      if (progress.completedAt[number]) {
+        delete progress.completedAt[number];
+        actionMessage = "Check-in removed. Your other days are still here.";
+      } else {
+        progress.completedAt[number] = dateKey(new Date());
+        progress.selectedDay = getNextIncomplete(number);
+        actionMessage = "A little good, done. Keep going at your own pace.";
+      }
+      saveProgress();
+      render();
+      elements.screenReaderStatus.textContent = elements.actionStatus.textContent;
+    }
+
+    function saveReflection() {
+      const number = currentDay();
+      const value = elements.reflectionInput.value;
+      if (value) progress.reflections[number] = value;
+      else delete progress.reflections[number];
+      saveProgress();
+      actionMessage = storageAvailable ? "Your reflection is saved on this device." : "Browser storage is unavailable; your reflection may not be saved.";
+      elements.actionStatus.textContent = actionMessage;
+    }
+
+    function wrapCanvasText(context, text, x, y, maxWidth, lineHeight, maxLines) {
+      const words = text.split(/\s+/);
+      let line = "";
+      let lineCount = 0;
+      for (let index = 0; index < words.length; index += 1) {
+        const testLine = line ? `${line} ${words[index]}` : words[index];
+        if (context.measureText(testLine).width > maxWidth && line) {
+          context.fillText(line, x, y);
+          line = words[index];
+          y += lineHeight;
+          lineCount += 1;
+          if (lineCount >= maxLines) return y;
+        } else {
+          line = testLine;
+        }
+      }
+      if (line) context.fillText(line, x, y);
+      return y + lineHeight;
+    }
+
+    function drawStoryImage(day, number) {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const context = canvas.getContext("2d");
+      context.fillStyle = "#f5f1e8";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#e7e9d6";
+      context.beginPath();
+      context.arc(975, 108, 185, 0, Math.PI * 2);
+      context.fill();
+      context.fillStyle = "#f2ded1";
+      context.beginPath();
+      context.arc(108, 1812, 206, 0, Math.PI * 2);
+      context.fill();
+      context.strokeStyle = "#d8d1c2";
+      context.lineWidth = 2;
+      context.strokeRect(58, 58, 964, 1804);
+
+      context.textAlign = "center";
+      context.fillStyle = "#3c5a43";
+      context.font = "700 34px system-ui, sans-serif";
+      context.fillText("SMALL GOOD", 540, 212);
+      context.fillStyle = "#69756a";
+      context.font = "500 23px system-ui, sans-serif";
+      context.fillText("A 30-DAY KINDNESS CHALLENGE", 540, 260);
+
+      context.fillStyle = "#ba664b";
+      context.font = "800 28px system-ui, sans-serif";
+      context.fillText(`DAY ${String(number).padStart(2, "0")}  /  30`, 540, 402);
+      context.fillStyle = "#27372e";
+      context.font = "500 70px Georgia, serif";
+      const actBottom = wrapCanvasText(context, day.act, 540, 570, 800, 92, 5);
+
+      const cardY = Math.max(740, actBottom + 70);
+      context.fillStyle = "#fffdf8";
+      context.beginPath();
+      context.roundRect(108, cardY, 864, 505, 34);
+      context.fill();
+      context.fillStyle = "#69756a";
+      context.font = "800 24px system-ui, sans-serif";
+      context.fillText("A LITTLE WHY", 540, cardY + 84);
+      context.fillStyle = "#27372e";
+      context.font = "500 34px Georgia, serif";
+      wrapCanvasText(context, day.why, 540, cardY + 155, 700, 48, 4);
+      context.fillStyle = "#3c5a43";
+      context.font = "600 31px Georgia, serif";
+      context.fillText(day.tl, 540, cardY + 376);
+      context.fillStyle = "#69756a";
+      context.font = "500 22px system-ui, sans-serif";
+      context.fillText(day.translation, 540, cardY + 416);
+
+      context.fillStyle = "#27372e";
+      context.font = "500 37px Georgia, serif";
+      context.fillText("One small act. One day at a time.", 540, 1550);
+      context.fillStyle = "#69756a";
+      context.font = "500 24px system-ui, sans-serif";
+      context.fillText("Made with care by Peds", 540, 1654);
+      context.fillStyle = "#3c5a43";
+      context.font = "700 27px system-ui, sans-serif";
+      context.fillText(`Tag ${INSTAGRAM_HANDLE}`, 540, 1700);
+      context.fillStyle = "#69756a";
+      context.font = "500 21px system-ui, sans-serif";
+      context.fillText("Choose an act that feels safe and right for you.", 540, 1780);
+      context.textAlign = "start";
+      return canvas;
+    }
+
+    async function shareDay() {
+      const number = currentDay();
+      const day = DAYS[number - 1];
+      elements.actionStatus.textContent = "Making your story card…";
+      try {
+        const canvas = drawStoryImage(day, number);
+        const blob = await new Promise((resolve, reject) => {
+          canvas.toBlob((result) => result ? resolve(result) : reject(new Error("The image could not be created.")), "image/png");
+        });
+        const file = new File([blob], `small-good-day-${String(number).padStart(2, "0")}.png`, { type: "image/png" });
+        const shareText = `Day ${number} of Small Good: ${day.act} ${INSTAGRAM_HANDLE}`;
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ title: `Small Good · Day ${number}`, text: shareText, files: [file] });
+          elements.actionStatus.textContent = "Your story card is ready to share.";
+        } else {
+          const imageUrl = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = imageUrl;
+          link.download = file.name;
+          document.body.append(link);
+          link.click();
+          link.remove();
+          window.setTimeout(() => URL.revokeObjectURL(imageUrl), 1500);
+          elements.actionStatus.textContent = "Story image saved. Add it to your story when you're ready.";
+        }
+      } catch (error) {
+        elements.actionStatus.textContent = error && error.name === "AbortError" ? "No worries—your story card is still here." : "Couldn't make the story card in this browser. Try again or take a screenshot.";
+      }
+    }
+
+    function clearProgress() {
+      const confirmed = window.confirm("Clear all saved Small Good check-ins and reflections from this browser?");
+      if (!confirmed) return;
+      progress = freshProgress();
+      actionMessage = "Progress cleared. You can begin again whenever you like.";
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+        storageAvailable = true;
+      } catch (error) {
+        storageAvailable = false;
+      }
+      render();
+      if (!storageAvailable) elements.actionStatus.textContent = "Browser storage is unavailable.";
+    }
+
+    elements.reflectionInput.addEventListener("input", saveReflection);
+    elements.completeButton.addEventListener("click", markDay);
+    elements.shareButton.addEventListener("click", shareDay);
+    elements.resetButton.addEventListener("click", clearProgress);
+    saveProgress();
+    render();
+  </script>
+</body>
+</html>
